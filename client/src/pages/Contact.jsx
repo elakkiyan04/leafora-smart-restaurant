@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import toast from 'react-hot-toast';
 import { Mail, Phone, MapPin, Send, Share2, Globe } from 'lucide-react';
 
@@ -54,7 +54,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', {
+      const response = await api.post('/api/contact', {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim(),

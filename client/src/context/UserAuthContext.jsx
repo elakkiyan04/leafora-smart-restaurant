@@ -1,10 +1,10 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import toast from 'react-hot-toast';
 
 const UserAuthContext = createContext();
 
-const API_URL = 'http://localhost:5000/api/users';
+const API_URL = '/api/users';
 
 export const UserAuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
@@ -14,16 +14,16 @@ export const UserAuthProvider = ({ children }) => {
   // Set default authorization header if token exists
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {
-      delete axios.defaults.headers.common['Authorization'];
+      delete api.defaults.headers.common['Authorization'];
     }
   }, [token]);
 
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
+      const response = await api.post(`${API_URL}/login`, { email, password });
       const { token: resToken, user: resUser } = response.data;
       
       setToken(resToken);
@@ -60,7 +60,7 @@ export const UserAuthProvider = ({ children }) => {
   const register = async (firstName, email, password) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/signup`, { firstName, email, password });
+      const response = await api.post(`${API_URL}/signup`, { firstName, email, password });
       const { token: resToken, user: resUser } = response.data;
 
       setToken(resToken);
@@ -114,7 +114,7 @@ export const UserAuthProvider = ({ children }) => {
   const updateProfile = async (firstName, email) => {
     setLoading(true);
     try {
-      const response = await axios.put(`${API_URL}/profile`, { firstName, email }, {
+      const response = await api.put(`${API_URL}/profile`, { firstName, email }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const { token: resToken, user: resUser } = response.data;

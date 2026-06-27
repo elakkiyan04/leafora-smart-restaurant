@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const ReservationContext = createContext();
 
@@ -11,7 +11,7 @@ export const useReservation = () => {
   return context;
 };
 
-const API_URL = 'http://localhost:5000/api/reservations';
+const API_URL = '/api/reservations';
 
 export const ReservationProvider = ({ children }) => {
   const [reservations, setReservations] = useState([]);
@@ -47,7 +47,7 @@ export const ReservationProvider = ({ children }) => {
   // Fetch reservations from backend
   const fetchReservations = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await api.get(API_URL);
       const mapped = response.data.map(mapReservationFromServer);
       setReservations(mapped);
     } catch (error) {
@@ -118,7 +118,7 @@ export const ReservationProvider = ({ children }) => {
 
   const addReservation = async (reservationData) => {
     try {
-      const response = await axios.post(API_URL, reservationData);
+      const response = await api.post(API_URL, reservationData);
       const newReservation = mapReservationFromServer(response.data);
       
       setReservations(prev => [newReservation, ...prev]);
@@ -132,7 +132,7 @@ export const ReservationProvider = ({ children }) => {
 
   const updateReservationStatus = async (id, status) => {
     try {
-      const response = await axios.patch(`${API_URL}/${id}`, { status });
+      const response = await api.patch(`${API_URL}/${id}`, { status });
       const updated = mapReservationFromServer(response.data);
 
       setReservations(prev => prev.map(res => res.id === id ? updated : res));
@@ -150,7 +150,7 @@ export const ReservationProvider = ({ children }) => {
 
   const checkInReservation = async (id) => {
     try {
-      const response = await axios.patch(`${API_URL}/${id}`, { checkedIn: true });
+      const response = await api.patch(`${API_URL}/${id}`, { checkedIn: true });
       const updated = mapReservationFromServer(response.data);
 
       setReservations(prev => prev.map(res => res.id === id ? updated : res));
@@ -168,7 +168,7 @@ export const ReservationProvider = ({ children }) => {
 
   const allocateTable = async (id, tableNumber) => {
     try {
-      const response = await axios.patch(`${API_URL}/${id}`, { tableNumber });
+      const response = await api.patch(`${API_URL}/${id}`, { tableNumber });
       const updated = mapReservationFromServer(response.data);
 
       setReservations(prev => prev.map(res => res.id === id ? updated : res));
@@ -186,7 +186,7 @@ export const ReservationProvider = ({ children }) => {
 
   const deleteReservation = async (id) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await api.delete(`${API_URL}/${id}`);
       setReservations(prev => prev.filter(res => res.id !== id));
       
       setActiveReservation(prev => {

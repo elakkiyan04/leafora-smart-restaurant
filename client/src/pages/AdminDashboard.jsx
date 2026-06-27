@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
-import axios from 'axios';
+import api from '../services/api';
 import { 
   LayoutDashboard, Plus, Trash2, Edit, ShoppingBag, 
   DollarSign, QrCode, LogOut, Package, Clock, CheckCircle, XCircle, Menu, X, TrendingUp, Users, BarChart3, Download, Eye, Calendar, CalendarCheck,
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
   
   const fetchContactMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/contact');
+      const response = await api.get('/api/contact');
       setContactMessages(response.data);
     } catch (error) {
       console.error('Error fetching contact messages:', error);
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
   const handleDeleteMessage = async (id) => {
     if (window.confirm('Are you sure you want to delete this message?')) {
       try {
-        const response = await axios.delete(`http://localhost:5000/api/contact/${id}`);
+        const response = await api.delete(`/api/contact/${id}`);
         if (response.data.success) {
           toast.success('Message deleted successfully');
           setContactMessages(prev => prev.filter(msg => msg._id !== id));

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { CheckCircle2, Calendar, Users, Clock, MapPin, Crown, Globe, Sparkles, Phone, Mail, User, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import api from '../services/api';
 
 const ReservationConfirmation = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const ReservationConfirmation = () => {
     if (!reservation) {
       const fetchReservation = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/api/reservations/${reservationId}`);
+          const response = await api.get(`/api/reservations/${reservationId}`);
           // Support mapping tableNumber and reservationId correctly
           const data = response.data;
           const mapped = {

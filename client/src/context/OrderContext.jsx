@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const OrderContext = createContext();
 
@@ -11,7 +11,7 @@ export const useOrder = () => {
   return context;
 };
 
-const API_URL = 'http://localhost:5000/api/orders';
+const API_URL = '/api/orders';
 
 export const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
@@ -29,7 +29,7 @@ export const OrderProvider = ({ children }) => {
   // Fetch orders from Node/Express server
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await api.get(API_URL);
       const mapped = response.data.map(mapOrderFromServer);
       setOrders(mapped);
       setLoading(false);
@@ -69,7 +69,7 @@ export const OrderProvider = ({ children }) => {
         }))
       };
 
-      const response = await axios.post(API_URL, payload);
+      const response = await api.post(API_URL, payload);
       const newOrder = mapOrderFromServer(response.data);
       
       setOrders(prevOrders => [newOrder, ...prevOrders]);
@@ -82,7 +82,7 @@ export const OrderProvider = ({ children }) => {
 
   const updateOrderStatus = async (id, status) => {
     try {
-      const response = await axios.patch(`${API_URL}/${id}`, { status });
+      const response = await api.patch(`${API_URL}/${id}`, { status });
       const updated = mapOrderFromServer(response.data);
       
       setOrders(prevOrders =>
@@ -97,7 +97,7 @@ export const OrderProvider = ({ children }) => {
 
   const deleteOrder = async (id) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await api.delete(`${API_URL}/${id}`);
       setOrders(prevOrders => prevOrders.filter(order => order._id !== id));
     } catch (error) {
       console.error(`Error deleting order ${id}:`, error);

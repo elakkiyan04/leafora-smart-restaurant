@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import { 
   Clock, CheckCircle, Flame, Sparkles, MapPin, 
   ArrowLeft, Utensils, ShieldCheck, Heart 
@@ -23,7 +23,7 @@ const SmartOrderStatus = () => {
 
     const fetchOrder = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/orders/${orderId}`);
+        const res = await api.get(`/api/orders/${orderId}`);
         if (active) {
           setOrder(res.data);
           setLoading(false);
