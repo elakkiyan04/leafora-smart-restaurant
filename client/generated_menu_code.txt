@@ -1,0 +1,112 @@
+import classicBeefBurger from '../assets/images/classic-beef-burger.jpg';
+import cheeseBurger from '../assets/images/cheese-burger.jpg';
+import doublePattyBurger from '../assets/images/double-patty-burger.jpg';
+import spicyChickenBurger from '../assets/images/spicy-chicken-burger.jpg';
+import friedChickenBucket from '../assets/images/fried-chicken-bucket.jpg';
+import grilledChickenBreast from '../assets/images/grilled-chicken-breast.jpg';
+import bBQChickenWings from '../assets/images/bbq-chicken-wings.jpg';
+import crispyChickenTenders from '../assets/images/crispy-chicken-tenders.jpg';
+import chickenNoodles from '../assets/images/chicken-noodles.jpg';
+import vegNoodles from '../assets/images/veg-noodles.jpg';
+import spicySeafoodNoodles from '../assets/images/spicy-seafood-noodles.jpg';
+import teriyakiBeefNoodles from '../assets/images/teriyaki-beef-noodles.jpg';
+import premiumRibeyeSteak from '../assets/images/premium-ribeye-steak.jpg';
+import tBoneSteak from '../assets/images/t-bone-steak.jpg';
+import sirloinSteak from '../assets/images/sirloin-steak.jpg';
+import garlicButterSteakBites from '../assets/images/garlic-butter-steak-bites.jpg';
+import truffleMushroomPasta from '../assets/images/truffle-mushroom-pasta.jpg';
+import creamyAlfredoPasta from '../assets/images/creamy-alfredo-pasta.jpg';
+import spaghettiBolognese from '../assets/images/spaghetti-bolognese.jpg';
+import seafoodMarinara from '../assets/images/seafood-marinara.jpg';
+import classicMargheritaPizza from '../assets/images/classic-margherita-pizza.jpg';
+import pepperoniFeast from '../assets/images/pepperoni-feast.jpg';
+import vegetarianSupreme from '../assets/images/vegetarian-supreme.jpg';
+import bBQChickenPizza from '../assets/images/bbq-chicken-pizza.jpg';
+import spicyTunaRoll from '../assets/images/spicy-tuna-roll.jpg';
+import californiaRoll from '../assets/images/california-roll.jpg';
+import salmonNigiri from '../assets/images/salmon-nigiri.jpg';
+import dragonRoll from '../assets/images/dragon-roll.jpg';
+import lobsterBisque from '../assets/images/lobster-bisque.jpg';
+import creamyTomatoSoup from '../assets/images/creamy-tomato-soup.jpg';
+import chickenSweetCorn from '../assets/images/chicken-sweet-corn.jpg';
+import hotAndSourSoup from '../assets/images/hot-and-sour-soup.jpg';
+import chickenBriyani from '../assets/images/chicken-briyani.jpg';
+import muttonBriyani from '../assets/images/mutton-briyani.jpg';
+import seafoodBriyani from '../assets/images/seafood-briyani.jpg';
+import cheeseBriyani from '../assets/images/cheese-briyani.jpg';
+import chickenFriedRice from '../assets/images/chicken-fried-rice.jpg';
+import seafoodFriedRice from '../assets/images/seafood-fried-rice.jpg';
+import mixedFriedRice from '../assets/images/mixed-fried-rice.jpg';
+import eggFriedRice from '../assets/images/egg-fried-rice.jpg';
+import dolphinKothu from '../assets/images/dolphin-kothu.jpg';
+import cheeseKothu from '../assets/images/cheese-kothu.jpg';
+import chickenKothu from '../assets/images/chicken-kothu.jpg';
+import seafoodKothu from '../assets/images/seafood-kothu.jpg';
+
+  const menuItems = [
+    // Burger
+    { id: 1, name: "Classic Beef Burger", price: 1500, category: "Burger", image: classicBeefBurger },
+    { id: 2, name: "Cheese Burger", price: 1800, category: "Burger", image: cheeseBurger },
+    { id: 3, name: "Double Patty Burger", price: 2500, category: "Burger", image: doublePattyBurger },
+    { id: 4, name: "Spicy Chicken Burger", price: 1600, category: "Burger", image: spicyChickenBurger },
+
+    // Chicken
+    { id: 5, name: "Fried Chicken Bucket", price: 2800, category: "Chicken", image: friedChickenBucket },
+    { id: 6, name: "Grilled Chicken Breast", price: 2200, category: "Chicken", image: grilledChickenBreast },
+    { id: 7, name: "BBQ Chicken Wings", price: 1900, category: "Chicken", image: bBQChickenWings },
+    { id: 8, name: "Crispy Chicken Tenders", price: 1700, category: "Chicken", image: crispyChickenTenders },
+
+    // Noodles
+    { id: 9, name: "Chicken Noodles", price: 1200, category: "Noodles", image: chickenNoodles },
+    { id: 10, name: "Veg Noodles", price: 900, category: "Noodles", image: vegNoodles },
+    { id: 11, name: "Spicy Seafood Noodles", price: 1800, category: "Noodles", image: spicySeafoodNoodles },
+    { id: 12, name: "Teriyaki Beef Noodles", price: 1600, category: "Noodles", image: teriyakiBeefNoodles },
+
+    // Steak
+    { id: 13, name: "Premium Ribeye Steak", price: 5500, category: "Steak", image: premiumRibeyeSteak },
+    { id: 14, name: "T-Bone Steak", price: 6200, category: "Steak", image: tBoneSteak },
+    { id: 15, name: "Sirloin Steak", price: 4800, category: "Steak", image: sirloinSteak },
+    { id: 16, name: "Garlic Butter Steak Bites", price: 3500, category: "Steak", image: garlicButterSteakBites },
+
+    // Pasta
+    { id: 17, name: "Truffle Mushroom Pasta", price: 2400, category: "Pasta", image: truffleMushroomPasta },
+    { id: 18, name: "Creamy Alfredo Pasta", price: 1800, category: "Pasta", image: creamyAlfredoPasta },
+    { id: 19, name: "Spaghetti Bolognese", price: 2100, category: "Pasta", image: spaghettiBolognese },
+    { id: 20, name: "Seafood Marinara", price: 2600, category: "Pasta", image: seafoodMarinara },
+
+    // Pizza
+    { id: 21, name: "Classic Margherita Pizza", price: 1900, category: "Pizza", image: classicMargheritaPizza },
+    { id: 22, name: "Pepperoni Feast", price: 2500, category: "Pizza", image: pepperoniFeast },
+    { id: 23, name: "Vegetarian Supreme", price: 2200, category: "Pizza", image: vegetarianSupreme },
+    { id: 24, name: "BBQ Chicken Pizza", price: 2700, category: "Pizza", image: bBQChickenPizza },
+
+    // Sushi
+    { id: 25, name: "Spicy Tuna Roll", price: 2800, category: "Sushi", image: spicyTunaRoll },
+    { id: 26, name: "California Roll", price: 2400, category: "Sushi", image: californiaRoll },
+    { id: 27, name: "Salmon Nigiri", price: 3200, category: "Sushi", image: salmonNigiri },
+    { id: 28, name: "Dragon Roll", price: 3500, category: "Sushi", image: dragonRoll },
+
+    // Soup
+    { id: 29, name: "Lobster Bisque", price: 2100, category: "Soup", image: lobsterBisque },
+    { id: 30, name: "Creamy Tomato Soup", price: 1200, category: "Soup", image: creamyTomatoSoup },
+    { id: 31, name: "Chicken Sweet Corn", price: 1400, category: "Soup", image: chickenSweetCorn },
+    { id: 32, name: "Hot & Sour Soup", price: 1500, category: "Soup", image: hotAndSourSoup },
+
+    // Briyani
+    { id: 33, name: "Chicken Briyani", price: 1500, category: "Briyani", rating: 4.8, image: chickenBriyani },
+    { id: 34, name: "Mutton Briyani", price: 2200, category: "Briyani", rating: 4.9, image: muttonBriyani },
+    { id: 35, name: "Seafood Briyani", price: 2500, category: "Briyani", rating: 4.7, image: seafoodBriyani },
+    { id: 36, name: "Cheese Briyani", price: 1800, category: "Briyani", rating: 4.6, image: cheeseBriyani },
+
+    // Fried Rice
+    { id: 37, name: "Chicken Fried Rice", price: 1200, category: "Fried Rice", rating: 4.7, image: chickenFriedRice },
+    { id: 38, name: "Seafood Fried Rice", price: 1800, category: "Fried Rice", rating: 4.8, image: seafoodFriedRice },
+    { id: 39, name: "Mixed Fried Rice", price: 1600, category: "Fried Rice", rating: 4.9, image: mixedFriedRice },
+    { id: 40, name: "Egg Fried Rice", price: 900, category: "Fried Rice", rating: 4.5, image: eggFriedRice },
+
+    // Kothu
+    { id: 41, name: "Dolphin Kothu", price: 1800, category: "Kothu", rating: 4.9, image: dolphinKothu },
+    { id: 42, name: "Cheese Kothu", price: 1500, category: "Kothu", rating: 4.8, image: cheeseKothu },
+    { id: 43, name: "Chicken Kothu", price: 1300, category: "Kothu", rating: 4.7, image: chickenKothu },
+    { id: 44, name: "Seafood Kothu", price: 1900, category: "Kothu", rating: 4.8, image: seafoodKothu }
+  ];

@@ -1,0 +1,67 @@
+  const menuItems = [
+    // Burger
+    { id: 1, name: "Classic Beef Burger", price: 1500, category: "Burger", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Classic%20Beef%20Burger%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 2, name: "Cheese Burger", price: 1800, category: "Burger", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Cheese%20Burger%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 3, name: "Double Patty Burger", price: 2500, category: "Burger", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Double%20Patty%20Burger%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 4, name: "Spicy Chicken Burger", price: 1600, category: "Burger", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Spicy%20Chicken%20Burger%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Chicken
+    { id: 5, name: "Fried Chicken Bucket", price: 2800, category: "Chicken", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Fried%20Chicken%20Bucket%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 6, name: "Grilled Chicken Breast", price: 2200, category: "Chicken", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Grilled%20Chicken%20Breast%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 7, name: "BBQ Chicken Wings", price: 1900, category: "Chicken", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20BBQ%20Chicken%20Wings%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 8, name: "Crispy Chicken Tenders", price: 1700, category: "Chicken", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Crispy%20Chicken%20Tenders%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Noodles
+    { id: 9, name: "Chicken Noodles", price: 1200, category: "Noodles", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Chicken%20Noodles%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 10, name: "Veg Noodles", price: 900, category: "Noodles", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Veg%20Noodles%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 11, name: "Spicy Seafood Noodles", price: 1800, category: "Noodles", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Spicy%20Seafood%20Noodles%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 12, name: "Teriyaki Beef Noodles", price: 1600, category: "Noodles", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Teriyaki%20Beef%20Noodles%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Steak
+    { id: 13, name: "Premium Ribeye Steak", price: 5500, category: "Steak", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Premium%20Ribeye%20Steak%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 14, name: "T-Bone Steak", price: 6200, category: "Steak", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20T-Bone%20Steak%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 15, name: "Sirloin Steak", price: 4800, category: "Steak", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Sirloin%20Steak%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 16, name: "Garlic Butter Steak Bites", price: 3500, category: "Steak", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Garlic%20Butter%20Steak%20Bites%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Pasta
+    { id: 17, name: "Truffle Mushroom Pasta", price: 2400, category: "Pasta", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Truffle%20Mushroom%20Pasta%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 18, name: "Creamy Alfredo Pasta", price: 1800, category: "Pasta", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Creamy%20Alfredo%20Pasta%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 19, name: "Spaghetti Bolognese", price: 2100, category: "Pasta", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Spaghetti%20Bolognese%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 20, name: "Seafood Marinara", price: 2600, category: "Pasta", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Seafood%20Marinara%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Pizza
+    { id: 21, name: "Classic Margherita Pizza", price: 1900, category: "Pizza", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Classic%20Margherita%20Pizza%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 22, name: "Pepperoni Feast", price: 2500, category: "Pizza", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Pepperoni%20Feast%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 23, name: "Vegetarian Supreme", price: 2200, category: "Pizza", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Vegetarian%20Supreme%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 24, name: "BBQ Chicken Pizza", price: 2700, category: "Pizza", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20BBQ%20Chicken%20Pizza%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Sushi
+    { id: 25, name: "Spicy Tuna Roll", price: 2800, category: "Sushi", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Spicy%20Tuna%20Roll%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 26, name: "California Roll", price: 2400, category: "Sushi", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20California%20Roll%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 27, name: "Salmon Nigiri", price: 3200, category: "Sushi", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Salmon%20Nigiri%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 28, name: "Dragon Roll", price: 3500, category: "Sushi", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Dragon%20Roll%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Soup
+    { id: 29, name: "Lobster Bisque", price: 2100, category: "Soup", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Lobster%20Bisque%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 30, name: "Creamy Tomato Soup", price: 1200, category: "Soup", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Creamy%20Tomato%20Soup%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 31, name: "Chicken Sweet Corn", price: 1400, category: "Soup", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Chicken%20Sweet%20Corn%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 32, name: "Hot & Sour Soup", price: 1500, category: "Soup", image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Hot%20%26%20Sour%20Soup%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Briyani
+    { id: 33, name: "Chicken Briyani", price: 1500, category: "Briyani", rating: 4.8, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Chicken%20Briyani%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 34, name: "Mutton Briyani", price: 2200, category: "Briyani", rating: 4.9, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Mutton%20Briyani%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 35, name: "Seafood Briyani", price: 2500, category: "Briyani", rating: 4.7, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Seafood%20Briyani%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 36, name: "Cheese Briyani", price: 1800, category: "Briyani", rating: 4.6, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Cheese%20Briyani%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Fried Rice
+    { id: 37, name: "Chicken Fried Rice", price: 1200, category: "Fried Rice", rating: 4.7, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Chicken%20Fried%20Rice%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 38, name: "Seafood Fried Rice", price: 1800, category: "Fried Rice", rating: 4.8, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Seafood%20Fried%20Rice%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 39, name: "Mixed Fried Rice", price: 1600, category: "Fried Rice", rating: 4.9, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Mixed%20Fried%20Rice%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 40, name: "Egg Fried Rice", price: 900, category: "Fried Rice", rating: 4.5, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Egg%20Fried%20Rice%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+
+    // Kothu
+    { id: 41, name: "Dolphin Kothu", price: 1800, category: "Kothu", rating: 4.9, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Dolphin%20Kothu%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 42, name: "Cheese Kothu", price: 1500, category: "Kothu", rating: 4.8, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Cheese%20Kothu%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 43, name: "Chicken Kothu", price: 1300, category: "Kothu", rating: 4.7, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Chicken%20Kothu%2C%20highly%20detailed?width=800&height=600&nologo=true" },
+    { id: 44, name: "Seafood Kothu", price: 1900, category: "Kothu", rating: 4.8, image: "https://image.pollinations.ai/prompt/premium%20dark%20moody%20restaurant%20food%20photography%20of%20Seafood%20Kothu%2C%20highly%20detailed?width=800&height=600&nologo=true" }
+  ];
