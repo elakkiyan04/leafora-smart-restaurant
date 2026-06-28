@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://leafora-smart-restaurant.onrender.com',
+  baseURL: 'https://leafora-smart-restaurant.onrender.com',
 });
 
 // Request interceptor to automatically add authorization header
