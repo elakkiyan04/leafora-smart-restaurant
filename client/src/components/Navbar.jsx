@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu as MenuIcon, X, User, LogOut, ClipboardList, Settings, QrCode } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
 import { useCart } from '../context/CartContext';
 import { useUserAuth } from '../context/UserAuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -60,7 +59,11 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 rounded-2xl border border-orange-500/20 bg-black/60 backdrop-blur-xl shadow-[0_10px_35px_rgba(249,115,22,0.15)] w-[calc(100%-2.5rem)] max-w-[1780px] ${isScrolled ? 'top-4 py-3 bg-[#0a0a0a]/90 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_5px_20px_rgba(249,115,22,0.15)]' : 'top-6 py-4.5 bg-black/45'} px-4 sm:px-10 md:px-16`}>
+    <nav className={`fixed z-[100] transition-all duration-500 rounded-2xl border border-orange-500/20 bg-black/60 backdrop-blur-xl shadow-[0_10px_35px_rgba(249,115,22,0.15)] w-[calc(100%-2.5rem)] max-w-[1780px] ${
+      isMobileMenuOpen 
+        ? 'left-5' 
+        : 'left-1/2 -translate-x-1/2'
+    } ${isScrolled ? 'top-4 py-3 bg-[#0a0a0a]/90 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_5px_20px_rgba(249,115,22,0.15)]' : 'top-6 py-4.5 bg-black/45'} px-4 sm:px-10 md:px-16`}>
       <div className="w-full flex justify-between items-center">
         
         {/* Logo */}
@@ -268,13 +271,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <AnimatePresence>
-        {isMobileMenuOpen && createPortal(
+        {isMobileMenuOpen && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden fixed inset-0 w-screen h-screen bg-[#0a0a0a]/98 backdrop-blur-2xl z-[98] overflow-y-auto pt-28 px-6 pb-10 flex flex-col"
+            className="lg:hidden fixed inset-0 w-screen h-screen bg-black/95 backdrop-blur-2xl z-[99] overflow-y-auto pt-28 px-6 pb-10 flex flex-col"
           >
             <div className="px-5 py-6 flex flex-col space-y-3">
               {navLinks.map((link, idx) => (
@@ -381,8 +384,7 @@ const Navbar = () => {
                 </div>
               </motion.div>
             </div>
-          </motion.div>,
-          document.body
+          </motion.div>
         )}
       </AnimatePresence>
       <QrScannerModal isOpen={isScannerOpen} onClose={() => setIsScannerOpen(false)} />
