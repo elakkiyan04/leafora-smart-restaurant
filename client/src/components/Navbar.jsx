@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu as MenuIcon, X, User, LogOut, ClipboardList, Settings, QrCode } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useCart } from '../context/CartContext';
 import { useUserAuth } from '../context/UserAuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,6 +35,18 @@ const Navbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Lock background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { name: 'HOME', path: '/' },
@@ -255,12 +268,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen && createPortal(
           <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden absolute top-full left-0 w-full bg-[#0a0a0a]/98 backdrop-blur-2xl border-t border-white/5 overflow-y-auto max-h-[calc(100vh-120px)] rounded-b-2xl shadow-2xl"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden fixed inset-0 w-screen h-screen bg-[#0a0a0a]/98 backdrop-blur-2xl z-[98] overflow-y-auto pt-28 px-6 pb-10 flex flex-col"
           >
             <div className="px-5 py-6 flex flex-col space-y-3">
               {navLinks.map((link, idx) => (
@@ -367,7 +381,8 @@ const Navbar = () => {
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </motion.div>,
+          document.body
         )}
       </AnimatePresence>
       <QrScannerModal isOpen={isScannerOpen} onClose={() => setIsScannerOpen(false)} />
