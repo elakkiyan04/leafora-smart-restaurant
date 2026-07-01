@@ -47,7 +47,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 rounded-2xl border border-orange-500/20 bg-black/60 backdrop-blur-xl shadow-[0_10px_35px_rgba(249,115,22,0.15)] w-[calc(100%-2.5rem)] max-w-[1780px] ${isScrolled ? 'top-4 py-3 bg-[#0a0a0a]/90 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_5px_20px_rgba(249,115,22,0.15)]' : 'top-6 py-4.5 bg-black/45'} px-10 md:px-16`}>
+    <nav className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 rounded-2xl border border-orange-500/20 bg-black/60 backdrop-blur-xl shadow-[0_10px_35px_rgba(249,115,22,0.15)] w-[calc(100%-2.5rem)] max-w-[1780px] ${isScrolled ? 'top-4 py-3 bg-[#0a0a0a]/90 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_5px_20px_rgba(249,115,22,0.15)]' : 'top-6 py-4.5 bg-black/45'} px-4 sm:px-10 md:px-16`}>
       <div className="w-full flex justify-between items-center">
         
         {/* Logo */}
@@ -79,7 +79,7 @@ const Navbar = () => {
               </defs>
             </svg>
           </div>
-          <span className="font-display font-bold text-2.5xl tracking-wide text-white drop-shadow-md select-none">
+          <span className="font-display font-bold text-xl sm:text-2.5xl tracking-wide text-white drop-shadow-md select-none">
             Leafora
           </span>
         </Link>
@@ -260,9 +260,9 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden absolute top-full left-0 w-full bg-[#0a0a0a]/98 backdrop-blur-2xl border-t border-white/5 overflow-hidden rounded-b-2xl"
+            className="lg:hidden absolute top-full left-0 w-full bg-[#0a0a0a]/98 backdrop-blur-2xl border-t border-white/5 overflow-y-auto max-h-[calc(100vh-120px)] rounded-b-2xl shadow-2xl"
           >
-            <div className="px-6 py-8 flex flex-col space-y-4">
+            <div className="px-5 py-6 flex flex-col space-y-3">
               {navLinks.map((link, idx) => (
                 <motion.div
                   key={link.name}
@@ -273,7 +273,7 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-[10px] font-black tracking-widest uppercase px-6 py-4 rounded-2xl block transition-all duration-300 ${
+                    className={`text-xs font-bold tracking-widest uppercase px-5 py-3 rounded-2xl block transition-all duration-300 ${
                       isActive(link.path) 
                         ? 'text-black bg-gradient-to-r from-orange-400 to-orange-600 shadow-xl' 
                         : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -284,7 +284,7 @@ const Navbar = () => {
                 </motion.div>
               ))}
               
-              <div className="h-px w-full bg-white/5 my-4"></div>
+              <div className="h-px w-full bg-white/5 my-3"></div>
               
               <motion.div
                 initial={{ opacity: 0 }}
@@ -292,15 +292,15 @@ const Navbar = () => {
                 transition={{ delay: 0.3 }}
               >
                 {!user ? (
-                  <div className="flex flex-col space-y-3">
+                  <div className="flex flex-col space-y-2">
                     <Link 
                       to="/login" 
                       state={{ isLogin: true }}
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-xs font-black uppercase tracking-widest text-gray-300 px-6 py-4 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
+                      className="text-xs font-bold uppercase tracking-widest text-gray-300 px-5 py-3 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                        <User size={18} className="text-gray-400" />
+                      <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                        <User size={14} className="text-gray-400" />
                       </div>
                       Login
                     </Link>
@@ -308,59 +308,59 @@ const Navbar = () => {
                       to="/login" 
                       state={{ isLogin: false }}
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-xs font-black uppercase tracking-widest text-gray-300 px-6 py-4 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
+                      className="text-xs font-bold uppercase tracking-widest text-gray-300 px-5 py-3 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                        <User size={18} className="text-gray-400" />
+                      <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                        <User size={14} className="text-gray-400" />
                       </div>
                       Sign Up
                     </Link>
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-4 px-6 py-3 border-b border-white/5 mb-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#eab308] to-[#ca8a04] text-black font-black text-lg flex items-center justify-center shadow-lg border border-black">
+                    <div className="flex items-center gap-4 px-5 py-2.5 border-b border-white/5 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#eab308] to-[#ca8a04] text-black font-black text-md flex items-center justify-center shadow-lg border border-black">
                         {user.firstName ? user.firstName[0].toUpperCase() : 'U'}
                       </div>
                       <div>
-                        <p className="text-sm font-black text-white">{user.firstName}</p>
+                        <p className="text-sm font-bold text-white">{user.firstName}</p>
                         <p className="text-xs text-gray-500 font-bold">{user.email}</p>
                       </div>
                     </div>
-
+ 
                     <Link 
                       to="/profile" 
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-xs font-black uppercase tracking-widest text-gray-300 px-6 py-4 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
+                      className="text-xs font-bold uppercase tracking-widest text-gray-300 px-5 py-3 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
                     >
                       My Profile
                     </Link>
-
+ 
                     <Link 
                       to="/my-orders" 
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-xs font-black uppercase tracking-widest text-gray-300 px-6 py-4 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
+                      className="text-xs font-bold uppercase tracking-widest text-gray-300 px-5 py-3 hover:bg-white/5 rounded-2xl flex items-center gap-4 transition-colors"
                     >
                       My Orders
                     </Link>
-
+ 
                     <button 
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         logout();
                       }} 
-                      className="w-full text-left text-xs font-black uppercase tracking-widest text-red-400 px-6 py-4 hover:bg-red-500/10 rounded-2xl flex items-center gap-4 transition-colors"
+                      className="w-full text-left text-xs font-bold uppercase tracking-widest text-red-400 px-5 py-3 hover:bg-red-500/10 rounded-2xl flex items-center gap-4 transition-colors"
                     >
                       Logout
                     </button>
                   </div>
                 )}
-
-                <div className="pt-6">
+ 
+                <div className="pt-4">
                   <Link 
                     to="/menu" 
                     onClick={() => setIsMobileMenuOpen(false)} 
-                    className="w-full block text-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black py-5 rounded-2xl shadow-glow uppercase text-xs tracking-widest"
+                    className="w-full block text-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-black py-4 rounded-2xl shadow-glow uppercase text-xs tracking-widest"
                   >
                     ORDER NOW
                   </Link>

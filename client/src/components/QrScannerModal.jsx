@@ -16,6 +16,7 @@ const QrScannerModal = ({ isOpen, onClose }) => {
   const [cameras, setCameras] = useState([]);
   const [activeCameraId, setActiveCameraId] = useState('');
   const [isScanning, setIsScanning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Initialize and start the scanner
   useEffect(() => {
@@ -24,12 +25,14 @@ const QrScannerModal = ({ isOpen, onClose }) => {
     const initScanner = async () => {
       try {
         setError('');
+        setIsLoading(true);
         const devices = await Html5Qrcode.getCameras();
         setCameras(devices);
 
         if (devices.length === 0) {
           setError('No camera devices found.');
           setHasPermission(true);
+          setIsLoading(false);
           return;
         }
 
@@ -50,10 +53,14 @@ const QrScannerModal = ({ isOpen, onClose }) => {
         console.error('Camera initialization failed', err);
         setHasPermission(false);
         setError('Camera permission denied. Please allow camera access in your browser settings.');
+        setIsLoading(false);
       }
     };
 
     if (isOpen) {
+      setError('');
+      setHasPermission(null);
+      setIsLoading(true);
       // Delay slightly to ensure reader div is mounted in the DOM
       const timer = setTimeout(() => {
         initScanner();
@@ -68,6 +75,7 @@ const QrScannerModal = ({ isOpen, onClose }) => {
 
   const startScanning = async (scanner, cameraId) => {
     try {
+      setIsLoading(true);
       if (scanner.isScanning) {
         await scanner.stop();
       }
@@ -89,14 +97,18 @@ const QrScannerModal = ({ isOpen, onClose }) => {
           // Silent scan failures
         }
       );
+      setIsLoading(false);
     } catch (err) {
       console.error('Failed to start scanning', err);
       setError('Failed to start the camera stream. Please try again.');
       setIsScanning(false);
+      setIsLoading(false);
     }
   };
 
   const stopScanning = async () => {
+    setIsScanning(false);
+    setIsLoading(false);
     if (qrCodeRef.current) {
       try {
         if (qrCodeRef.current.isScanning) {
@@ -105,16 +117,24 @@ const QrScannerModal = ({ isOpen, onClose }) => {
       } catch (err) {
         console.error('Error stopping scanner', err);
       } finally {
-        setIsScanning(false);
+        try {
+          await qrCodeRef.current.clear();
+        } catch (clearErr) {
+          console.error('Error clearing scanner', clearErr);
+        }
+        qrCodeRef.current = null;
       }
     }
   };
 
-  const handleCameraChange = async (e) => {
-    const newCameraId = e.target.value;
-    setActiveCameraId(newCameraId);
+  const handleRotateCamera = async () => {
+    if (cameras.length <= 1) return;
+    const currentIndex = cameras.findIndex(cam => cam.id === activeCameraId);
+    const nextIndex = (currentIndex + 1) % cameras.length;
+    const nextCameraId = cameras[nextIndex].id;
+    setActiveCameraId(nextCameraId);
     if (qrCodeRef.current) {
-      await startScanning(qrCodeRef.current, newCameraId);
+      await startScanning(qrCodeRef.current, nextCameraId);
     }
   };
 
@@ -249,9 +269,15 @@ const QrScannerModal = ({ isOpen, onClose }) => {
                   <AlertCircle size={28} />
                 </div>
                 <p className="text-sm font-bold text-white mb-2">Camera Access Denied</p>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">
                   Please enable camera permissions in your browser or device settings to scan restaurant QR codes.
                 </p>
+                <button
+                  onClick={handleClose}
+                  className="px-4 py-2 text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl transition-colors"
+                >
+                  Close Scanner
+                </button>
               </div>
             ) : error ? (
               <div className="p-6 text-center flex flex-col items-center">
@@ -259,14 +285,28 @@ const QrScannerModal = ({ isOpen, onClose }) => {
                   <Camera size={28} />
                 </div>
                 <p className="text-sm font-bold text-white mb-2">Scanner Offline</p>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">
                   {error}
                 </p>
+                <button
+                  onClick={handleClose}
+                  className="px-4 py-2 text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl transition-colors"
+                >
+                  Close Scanner
+                </button>
               </div>
             ) : (
               <>
                 <div id="reader" className="w-full h-full object-cover"></div>
-                {isScanning && (
+                {isLoading && (
+                  <div className="absolute inset-0 bg-[#050505] flex flex-col items-center justify-center gap-3">
+                    <div className="w-10 h-10 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
+                    <span className="text-xs text-gray-400 font-bold uppercase tracking-widest animate-pulse">
+                      Starting Camera...
+                    </span>
+                  </div>
+                )}
+                {isScanning && !isLoading && (
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                     {/* Glowing scanner frame */}
                     <div className="w-[70%] h-[70%] border-2 border-orange-500 rounded-3xl relative shadow-[0_0_20px_rgba(249,115,22,0.3)] animate-pulse">
@@ -279,23 +319,27 @@ const QrScannerModal = ({ isOpen, onClose }) => {
             )}
           </div>
 
-          {/* Camera selection dropdown if multiple cameras available */}
-          {hasPermission && cameras.length > 1 && (
-            <div className="w-full mt-4 flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
-              <RefreshCw size={14} className="text-gray-400 animate-spin-slow" />
-              <select 
-                value={activeCameraId} 
-                onChange={handleCameraChange}
-                className="bg-transparent text-xs text-gray-300 font-bold border-none outline-none w-full cursor-pointer"
+          {/* Action buttons under scanner */}
+          <div className="flex items-center justify-center gap-4 mt-6 w-full">
+            <button
+              onClick={handleClose}
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 hover:text-red-300 font-bold text-xs uppercase tracking-wider transition-all"
+              title="Stop stream and close scanner"
+            >
+              <X size={14} />
+              <span>Close Camera</span>
+            </button>
+            {hasPermission && cameras.length > 1 && (
+              <button
+                onClick={handleRotateCamera}
+                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
+                title="Switch Camera"
               >
-                {cameras.map(camera => (
-                  <option key={camera.id} value={camera.id} className="bg-[#111] text-white">
-                    {camera.label || `Camera ${cameras.indexOf(camera) + 1}`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+                <RefreshCw size={14} className={isLoading ? "animate-spin" : ""} />
+                <span>Rotate Camera 🔄</span>
+              </button>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>
